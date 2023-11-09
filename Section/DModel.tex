@@ -1,0 +1,44 @@
+\section{Extracting Domain Models form Textual Requirements}\label{dmodel}
+Automated support for extracting domain models from requirements artefacts such as USs play a central role in effectively supporting the detection of dependencies and conflicts between user stories. Domain models are a simple way to understand the relationship between artefacts and the whole system. 
+
+In this section, we present a comprehensive exploration of techniques that can be employed for the extraction of domain models from agile product backlogs. Furthermore, we conduct a comparative analysis of these techniques. 
+\subsection{Visual Narrator: (Automated) Extraction of Conceptual Models form US} \label{vnarrator}
+Visual Narrator automatically derive conceptual modes from a concise and widely adopted NL notation for USs. Robeer et al. combine NLP heuristics into an algorithm that creates conceptual modes from USs. They present the Visual Narrator as a fully automated, opensource tool that implements the algorithm and generates conceptual models as Web Ontology Languages (OWL) \cite{Robeer2016}.\\ \\ 
+\textbf{A Generic Conceptual Model}\\
+Robeer et al. define a generic conceptual model of stories that dissects a single US and define its syntactic structure \cite{Lucassen2015}. 
+
+The conceptual model is assembled as a UML class diagram in figure \ref{fig:cmd}. US follow a standard predeﬁned format \cite{Wautelet2014} to capture three distinct aspects of a requirement:
+\begin{itemize}
+\item Who wants the functionality;
+\item What functionality the end users or stakeholders want the system to provide; and 
+\item Why the end users and stakeholders need this functionality (optional).
+\end{itemize}
+These three aspects are captured in a simple textual template to form a running sentence. Although many different templates exist, 70\% of practitioners use the template \enquote{As a \textless type of user\textgreater, I want \textless some goal\textgreater [so that \textless come reason\textgreater ]} \cite{Greer2004}. 
+The conceptual model distinguishes between the \emph{role}, \emph{means} and \emph{ends} parts of a US. Each of these parts features an \emph{indicator} which delimits the three basic parts of a US. Jointly, the indicators deﬁne the \emph{template} of a user story.
+
+The role part encompasses the role indicator and the \emph{functional} role, describing a generalized type of person \emph{who} interacts with the system. When no ambiguity exists, Robeer et al. use the term \emph{role} to denote both the full part and the \emph{functional role}. The \emph{means} consists of a \emph{subject}, a main \emph{object} of the functionality, and a \emph{main verb} describing the relationship between the subject and main object. The main object can be represented explicitly by the direct object or implicitly (\emph{e.g.}, \enquote{I want to log in} actually, refers to logging in the \emph{system}).
+
+Robeer et al. identified three main purposes that the \emph{ends} may take: (1) clarify the means, (2) reference another user story, or (3) introduce a qualitative requirement.
+\begin{figure}
+\center
+\includegraphics[width=9.03cm, height=7.76cm]{Conceptual_model_defining_the_syntax_of_a_US}
+\caption{Conceptual model defining the syntax of a US  \cite{Robeer2016}}\label{fig:cmd}
+\end{figure} \\  \\ 
+\textbf{The Visual Narrator Tool}\\
+To enable the automated extraction of conceptual modes from USs, Robeer et al. developed the \emph{Visual Narrator} tool on the basis of the 11 heuristics \cite{Robeer2016} which takes a set of USs as input and generates a conceptual model as output. The tool only accepts USs that use the indicator as identified by Wautelet \cite{Wautelet2014}: As | \emph{As a(n)} for the role, \emph{I want (to)} | \emph{I can} / \emph{I am able} / \emph{I would like} for the means, and \emph{so that} for the ends part. Syntactically invalid USs are not processed; in order to sanitize these stories, analysts should pre-process them using tools such as AQUSA \cite{lucassen2016improving}.
+
+The architecture of Visual Narrator comprises two main components: (1) the \emph{Processor} and the (2) \emph{Constructor}. The Processor analyzes USs, parsing them into tokens using spaCy \footnote{\href{https://spacy.io/}{\emph{https://spacy.io/}}} and determining token weights based on frequency and user-defined parameters. This results in a \emph{Term-by-User-Story} matrix with weighted terms.
+
+The Constructor then generates a conceptual model from the \emph{WeightedTokens}. It involves the \emph{PatternIdentifier}, which applies heuristics to identify patterns in USs, and the \emph{PatternFactory}, which creates an internal conceptual model based on these patterns and filters out concepts and relationships with weights below a user-specified \emph{threshold}. The Ontology component stores this model, linking parts of it to their originating USs.
+
+To extract a conceptual model from USs, Visual Narrator implements the procedure DERIVECM which takes as input a set of raw user stories \emph{S} and empty sets of concepts \emph{C} and relationships \emph{R}, and populates $C$ and $R$ while parsing the stories and applying the 11 heuristics.
+
+\begin{example}\label{ex_1}
+The WebCompany is a young Dutch company that creates tailor-made web business applications. The team consists of nine employees who iteratively develop applications in weekly Scrum sprints. WebCompany supplied 98 user stories covering the development of an entire web application focused on interactive story telling that was created in 2014. 73 of these 98 USs were syntactically correct, usable and relevant for conceptual model generation \cite{lucassen2016improving}. Part of the generated conceptual model is shown in figure \ref{fig:webcompany}.
+\begin{figure}
+\center
+\includegraphics[width=11.03cm, height=5.76cm]{web_company}
+\caption{Partial model for WebCompany generated with Visual Narrator   \cite{Robeer2016}}\label{fig:webcompany}
+\end{figure}
+\end{example} 
+\input{Section/DModel_2}

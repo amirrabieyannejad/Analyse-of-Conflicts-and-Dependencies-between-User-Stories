@@ -1,0 +1,16 @@
+\section{Conclusion}\label{conclusion}
+In Section \ref{usq}, we have undertaken a comparative analysis of various techniques for evaluating the quality of user stories, categorized according to different criteria. The INVEST criteria are deemed applicable in manual environments, such as those overseen by Product Owners, and necessitate a manual assessment against these criteria. The QUS framework, on the other hand, has been implemented through a tool named AQUSA to automate the process of assessing the quality of user stories. In our workflow's initial phase, we employ the QUS framework and AQUSA as tools to scrutinize user stories within the backlog, ensuring their applicability and alignment for subsequent actions.
+
+In Section \ref{dmodel}, we conducted an experiment to assess the performance of the Visual Narrator, GPT-3.5, and a CRF-based approach in automating the extraction of domain concepts from agile product backlogs. Given that the CRF generates a graph-based model, it is particularly advantageous for our approach, serving as input for the development of a transformation rule system.
+
+Section \ref{nlp} revolves around the comparison of various lexical resource techniques for computation. VerbNet, specializing in verbs, FrameNet, with a broader spectrum encompassing nouns and adjectives, and WordNet, offering a wide array of words spanning various parts of speech, have been evaluated. 
+
+For our purposes, VerbNet stands out as the most suitable technique. Its hierarchical classification of verbs into classes provides a structured and comprehensive approach for categorizing a wide range of verbs based on their semantics. This is of utmost importance in our endeavor to formulate transformation rules rooted in semantic interpretations of actions within user stories.
+
+Finally, in Section \ref{gts}, we scrutinize graph transformation tools, specifically Henshin and GROOVE. GROOVE is best suited for comprehensive analysis of the full state space and random-linear exploration, proving highly effective for analytical and verification purposes. Henshin, on the other hand, is an EMF-based transformation model boasting scalability and interoperability as its key attributes. 
+
+Notably, Henshin supports the analysis of conflicts and dependencies using the CPA extension. Furthermore, a persuasive attribute in favor of Henshin lies in its intrinsic provision of a versatile Application Programming Interface (API) through the CPA extension.
+
+Owing to the utilization of various tools and techniques for ascertaining dependencies and conflicts among user stories, several pertinent questions arise: Can we succeed in classifying all verbs in roughly into three categories namely \enquote{create}, \enquote{delete} and \enquote{forbid}? With regard to the quality analysis presented, there are not suitable analyses for all criteria, what could the analysis for missing criteria look like? Can we use graph transformations to find conflicts and dependencies between annotated user stories? To what extent does the effectiveness of our approach hinge on the datasets provided within the backlogs? would we characterize the overall effectiveness of our approach? 
+
+

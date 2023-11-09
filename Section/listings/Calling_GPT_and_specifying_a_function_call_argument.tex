@@ -1,0 +1,16 @@
+\begin{lstlisting}[language=json,firstnumber=1]
+response = openai.ChatCompletion.create(
+    model = "gpt-3.5-turbo-0613",
+    functions = [ #constraining_GPT_with_a_schema
+	{ "name": "record_elements", #Function to be called in the response
+	  "description": "Record_the_elements_extracted_from_a_story",
+	  "parameters": { #Signature_description
+		"type": "object",
+		"properties": {
+		"personas": {
+			"type": "array",
+			"description": "The list of personas extracted from the story",
+			"items": { "type": "string" }}}],
+    messages = conv,
+    temperature=0.0) #To_make_the_answer_deterministic_(as_much_as_possible)
+\end{lstlisting}

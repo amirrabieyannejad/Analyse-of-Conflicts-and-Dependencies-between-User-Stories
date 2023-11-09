@@ -1,0 +1,126 @@
+\subsection{A Modelling Backlogs as Composable Graphs} \label{composable_graph}
+Mosser et al. propose a model engineering method (and the associated tooling) to exploit a graph-based meta-modelling and compositional approach. The objective is to shorten the feedback loop between developers and POs while supporting agile development’s iterative and incremental nature. 
+
+The tool can extract what is called a conceptual model of a backlog in an ontology-like way. The conceptual models are then used to measure USs quality by detecting ambiguities or defects in a given story \cite{mosser2022modelling}.
+From a modelling point of view, Mosser et al. represents the concepts involved in the deﬁnition of a backlog in a metamodel, as depicted in figure \ref{fig:conceptual_metamodel}. Without surprise, the key concept is the notion of story, which brings a Benefit to a \emph{Persona} thanks to an Action performed on an \emph{Entity}. A Story is associated to a readiness \emph{Status}, and might optionally contribute to one or more \emph{QualityProperty} (\emph{e.g.}, security, performance).
+\begin{figure}
+\center
+\includegraphics[width=8.03cm, height=8.76cm]{Backlog_conceptual_metamodel}
+\caption{Backlog conceptual metamodel \cite{mosser2022modelling}}\label{fig:conceptual_metamodel}
+\end{figure}
+
+Consider, for example, the following story, extracted from the reference dataset \cite{Dalpiaz2018}: \enquote{As a user, I want to click on the address so that it takes me to a new tab with Google Maps.}. \emph{This story brings to the user (Persona) the beneﬁt of reaching a new Google Maps tab (Benefit) by clicking (Action) on the displayed address (Entity).}
+
+As Entities and Personas implement the \emph{jargon} to be used while specifying features in the backlog, they are deﬁned at the \emph{Backlog level}. On the contrary, Actions belong to the associated stories and are not shared with other stories. Finally, a \emph{Product} is deﬁned as the \emph{Backlog} used to specify its features.
+
+Mosser et al. propose in the context of backlog management a system which represented in figure \ref{fig:early_feedback} is proposed for utilization. Building upon the efficiency of NLP approaches. Mosser et al. suggest employing an NLP-based extractor to create a backlog model. This model will subsequently assist teams in the planning phase by aiding in the selection of stories for implementation during the upcoming iteration \cite{mosser2022modelling}.
+\begin{figure}
+\center
+\includegraphics[width=6.03cm, height=8.76cm]{Providing_early_feedback_at_the_backlog_level}
+\caption{Providing early feedback at the backlog level \cite{mosser2022modelling}}\label{fig:early_feedback}
+\end{figure}\\
+\textbf{Composable Backlogs}\\
+In order to support team customization (\emph{e.g.}, a given team might want to enrich the backlog metamodel with additional information existing in their product management system) Mossser et al. chose open-world(ontological) representation by modelling backlog as graphs \cite{mosser2022modelling}. The graph is equipped with constraints (\emph{e.g.}, a story always refers to a persona and an entity) to ensure that the minimal structure captured in the previously deﬁned metamodel is guaranteed.
+\begin{definition}[\textbf{Story}]
+A Story$s \in S$ is defined as a tuple $\left(P,A,E,K\right)$, where $P=\{p_1, ..., p_i\}$ is the set of involved personas, $A= \{a_1, ..., a_i\}$ the set of performed actions, and $E = \{e_1, ..., e_k\}$ the set of targeted entities. Additional knowledge (e.g., beneﬁt, architectural properties, status) can be declared as key-value pairs in $K = \{(k_1,v_1), ..., (k_l,v_l)\}$. The associated semantics is that the declared actions bind personas to entities. Considering that story independence is a pillar of agile methods (as, by deﬁnition, stories are independent inside a backlog), there is no equivalence class deﬁned over \\
+$S: \forall (s,s')\in S^2, s\neq s' \Rightarrow s \not \equiv s'$.
+\end{definition}
+\begin{definition}[\textbf{Backlog}]
+A backlog $b \in B$ is represented as an attributed typed graph $b = (V, E, A)$, with $V$ a set of typed vertices, $E$ a set of undirected edges linking existing vertices, and $A$ a set of key-value attributes. Vertices are typed according to the model element they represent $v \in V, type(v) \in \{ Persona, Entity, Story \} )$ . Edges are typed according to the kind of model elements they are binding. Like backlogs, vertices and edges can contain attributes, represented as \emph{(key, value)} pairs. The empty backlog is denoted as $\emptyset = (\emptyset ,\emptyset ,\emptyset )$.
+\end{definition}
+\begin{example}\label{ex_2}
+Backlog excerpt: Content Management System for Cornell University — CulRepo \emph{\cite{Dalpiaz2018}}.
+\begin{itemize}
+\item $s_1$: As a faculty member, I want to access a collection within the repository.
+\end{itemize}
+Associated model:
+\begin{itemize}
+\item $s_1 = (\{ faculty member \} ,\{ access\} ,\{ repository, collection\} ,\emptyset)\in S$
+\end{itemize}
+A backlog containing a single story $s_1$: (\enquote{As a faculty member, I want to access a collection within the repository}). \\ \\ 
+$b_1=\left(V_1 , E_1,\emptyset \right ) \in B$ \\ 
+$V_1=\left \{ Persona(faculty \ member, \emptyset \right )$ ,
+
+\ \ \ \ $Stroy \left (s_1, \{ \left (action, access \right ) \} \right )$
+
+\ \ \ \ $Entity \left (repository, \emptyset \right ) $,
+
+\ \ \ \ $Entity(collection, \emptyset ) \} $ \\ 
+$E_1 = \{ has\_for\_persona(s_1,faculty \ member)$,
+
+\ \ \ \ $has\_for\_entity \left (s_1,repository \right )$
+
+\ \ \ \ $has\_for\_entity(s_1, collection)\}$
+\end{example}
+\textbf{Conditional Random Fields (CRF)} \\ 
+CRFs \cite{Lafferty2001} are a particular class of \emph{Markov Random Fields}, a statistical modelling approach supporting the definition of discriminative models. They are classically used in pattern recognition tasks (labelling or parsing) when context is important identify such patterns \cite{arulmohan2023extracting}.
+
+To apply CRF Mosser et al. transform a given story into a sequence of tuples. Each tuple contains minimally three elements: \emph{(i)} the original word from the story, \emph{(ii)} its syntactical role in the story, and \emph{(iii)} its semantical role in the story. The syntactical role in the sentence is classically known as \emph{Part-of-Speech} (POS), describing the grammatical role of the word in the sentence. The semantical role plays a dual role here. For training the model, the tags will be extracted from the annotated dataset and used as target. When used as a predictor after training, these are the data Mosser et al. will ask the model for infer.
+
+The main limitations of CRF are that \emph{(i)} it works at the word level (model elements can spread across several words), and \emph{(ii)} it is not designed to identify relations between entities \cite{arulmohan2023extracting}.
+    To address the first limitation, Mosser et al. use a glueing heuristic. Words that are consecutively associated with the same label are considered as being the same model element, \emph{e.g.}, the subsequence [\enquote{UI}, \enquote{designer}] from the previous example is considered as one single model element of type \emph{Persona}.
+    
+Mooser et al. applied this heuristic to everything but verbs, as classically, two verbs following each other represent different actions. They used again heuristic approach to address the second limitation. Mooser et al. bound every \emph{Persona} to every primary \emph{Action} (as\emph{ trigger} relations), and every primary \emph{Actions} to every primary \emph{Entity} (as \emph{target} relations) \cite{arulmohan2023extracting}.
+\begin{example} Consider the following example:\\ \\
+$S=[^\prime As^\prime,^\prime a^\prime,^\prime UI^\prime,^\prime designer^\prime,^\prime,^\prime,\ .\ .\ .]$ \\
+$POS(S)=[ADP,DET,NOUN,NOUN,PUNCT,.\ .\ .]$ \\
+$Label \left (S \right ) = \left [ \emptyset ,\emptyset ,PERSONA,PERSONA,\emptyset ,.\ .\ .\right ]$ \\\\
+$S$ represents a given US (Table \ref{tb:feature_sets}). $POS \left (S \right )$ represent the Part-of-speech analysis of $S$. The story starts with an adposition (ADP), followed by determiner (DET), followed by a noun, followed by another noun, .... Then, $Lables\left (S \right )$ represents what we interest in: the first two words are not interesting, but the $3^{rd}\  and \ 4^{td}$ words represent a Persona.\\ 
+\emph{A complete version of the example is provided in Table \ref{tb:feature_sets}.}
+\end{example}
+\begin{figure}
+\center
+\includegraphics[width=\textwidth, height=2.76cm]{Example_of_annotated_user}
+\caption{Example of annotated user using Doccano Annotation UI \cite{arulmohan2023extracting}}\label{fig:annot_usr}
+\end{figure}
+\begin{figure}
+\begingroup
+\footnotesize
+\begin{tabularx}{\textwidth}{c@{\hspace{4pt}} | c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}}
+Word &As &a&\textcolor[rgb]{1.0, 0.0, 0.5}{UI}&\textcolor[rgb]{1.0, 0.0, 0.5}{designer}&, &I &want &to&\textcolor[rgb]{0.21, 0.46, 0.53}{begin}&\textcolor[rgb]{0.8, 0.33, 0.0}{user} &\textcolor[rgb]{0.8, 0.33, 0.0}{testing}&,\\
+POS&	ADP&	DET	&\textcolor[rgb]{1.0, 0.0, 0.5}{NOUN}	&\textcolor[rgb]{1.0, 0.0, 0.5}{NOUN}	&PUNCT	&PRON	&VERB	&PART	&\textcolor[rgb]{0.21, 0.46, 0.53}{VERB}	&\textcolor[rgb]{0.8, 0.33, 0.0}{NOUN}	&\textcolor[rgb]{0.8, 0.33, 0.0}{NOUN}	&PUNCT \\
+Label	&-	&-	&\textcolor[rgb]{1.0, 0.0, 0.5}{PER}	&\textcolor[rgb]{1.0, 0.0, 0.5}{PER}	&-	&-	&-	&-	&\textcolor[rgb]{0.21, 0.46, 0.53}{P-ACT}	&\textcolor[rgb]{0.8, 0.33, 0.0}{P-ENT}	&\textcolor[rgb]{0.8, 0.33, 0.0}{P-ENT}	&- \\
+ \end{tabularx}
+  \begin{tabularx}{\textwidth}{c}
+  \\
+  \end{tabularx}
+ \begin{tabularx}{\textwidth}{c@{\hspace{4pt}} | c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}  c@{\hspace{4pt}}}
+Word&	so	&that	&I	&can	&\textcolor[rgb]{0.09, 0.45, 0.27}{validate}	&\textcolor[rgb]{0.5, 0.0, 0.5}{stakeholder}	&\textcolor[rgb]{0.5, 0.0, 0.5}{UI}	&\textcolor[rgb]{0.5, 0.0, 0.5}{improvement}	&\textcolor[rgb]{0.5, 0.0, 0.5}{requests}	&. \\
+POS	&SCONJ	&SCONJ	&PRON	&AUX	&\textcolor[rgb]{0.09, 0.45, 0.27}{VERB}	&\textcolor[rgb]{0.5, 0.0, 0.5}{NOUN}	&\textcolor[rgb]{0.5, 0.0, 0.5}{NOUN}	&\textcolor[rgb]{0.5, 0.0, 0.5}{NOUN}	&\textcolor[rgb]{0.5, 0.0, 0.5}{NOUN}	&PUNCT\\
+Label	&-	&-	&-	&-	&\textcolor[rgb]{0.09, 0.45, 0.27}{S-ACT}	&\textcolor[rgb]{0.5, 0.0, 0.5}{S-ENT}	&\textcolor[rgb]{0.5, 0.0, 0.5}{S-ENT}	&\textcolor[rgb]{0.5, 0.0, 0.5}{S-ENT}	&\textcolor[rgb]{0.5, 0.0, 0.5}{S-ENT}	&-\\
+ \end{tabularx} \\ \\ 
+\scriptsize \emph{POS tags are the Universal POS tags \\ 
+Labels: PER (Persona), P-ACT (Primary Action), P-ENT (Primary Entity), S-ACT (Secondary Action), S-ENT (Secondary Entity)}
+\begin{TableCaption}
+\caption{Minimal Feature Set, associating part-of-speech (POS) and semantic labels to each word in a given story \cite{arulmohan2023extracting}}\label{tb:feature_sets}
+\end{TableCaption}
+\endgroup
+\end{figure}
+\textbf{Extracting Domain Models with GPT 3.5} \\
+Mooser et al. experimented with ChatGPT to find the best way to extract the information from a US backlog in a \emph{\enquote{rapid prototyping}} way. They initially used a batch approach to extract information from stories using a GPT agent. However, they faced limitations due to token limits and hallucinations. To address this, they switched to a one-by-one story approach, reducing hallucinations but still producing unusable results. 
+
+They then explored function calls introduced in \emph{gpt-3.5-turbo-0613} \footnote{\href{https://platform.openai.com/docs/guides/gpt/completions-api}{https://platform.openai.com/docs/guides/gpt/completions-api}}, allowing control over output which make developer able to provide a JSON schema in order to model their response, and the system will use this schema and \emph{\enquote{fill in the blanks}} instead of regular text generation.
+\begin{example}
+If one expects their answer to be an array of strings containing the name of the personas, they can provide a schema inside their request, and GPT will use it as output format (as in Figure \ref{fig:calling_gpt}, line $3 \rightarrow  12$). An example of such a constrained response is described in Figure \ref{fig:gpt_answer}.
+\begin{figure}
+\input{Section/listings/Calling_GPT_and_specifying_a_function_call_argument}
+\caption{Calling GPT 3.5 and specifying a function call argument  \cite{arulmohan2023extracting}}\label{fig:calling_gpt}
+\end{figure}
+\begin{figure}
+\input{Section/listings/Example_of_answer_from_the_API}
+\caption{Example of answer from the API (execution of Figure \ref{fig:calling_gpt})  \cite{arulmohan2023extracting}}\label{fig:gpt_answer}
+\end{figure}
+\end{example}
+To address limitations in GPT's output format control, the Mosser et al. introduced the option to use JSON schemas in requests, allowing users to specify the desired output format. They also explored the use of function calls as responses but found it impractical due to conversation termination. Faced with this, they had two options: defining a large schema or engaging in a conversation with the model. They chose the latter, designing the processing of each story as a conversation with a smaller, dedicated schema.
+Eventually, they adopted a conversation-based approach with smaller JSON schemas to process each story effectively. 
+They organized the conversation into four phases:
+\begin{enumerate}
+\item Setup. First, the system role will be impersonated and ask the engine to adopt a persona. 
+\item Concepts. The task of extracting personas, entities, actions and benefit from a story will be proceed.
+\item Categorization. Given stateless of the model, it becomes necessary to inject the answer obtained from the preceding phase into the ongoing conversation. Consequently, Mooser et al. assume the role of the assistant and include a conversation entry detailing the  \textless CONCEPTS\textgreater \ obtained in the previous phase. Following the established pattern from the prior phase, Mooser et al. articulate the task using the system role, which entails categorizing primary and secondary actions and entities.
+\item Relations. The final step uses the same pattern. Mosser et al. first inject the \textless CATEGORIES\textgreater \ as the assistant, and then describe the task and provide an example as the system.
+\end{enumerate}
+
+
+\input{Section/DModel_3}
+

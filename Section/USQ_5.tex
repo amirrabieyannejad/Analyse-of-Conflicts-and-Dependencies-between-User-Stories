@@ -1,0 +1,32 @@
+\subsection{Comparative Analysis} \label{usq_5}
+In this subsection we consider a comparative analysis of mentioned methodologies to discern the most suitable approach for our specific context.
+The IEEE Recommended Practice for Software Requirements Speciﬁcations deﬁnes requirements quality on the basis of eight characteristics \cite{doe2011recommended}: correct, unambiguous, complete, consistent, ranked for importance/stability, veriﬁable, modiﬁable, and traceable. The standard, however, is generic and it is well known that speciﬁcations are hardly able to meet those criteria \cite{glinz2000improving}. 
+
+With agile requirements in mind, the Agile Requirements Veriﬁcation Framework \cite{heck2014quality} deﬁnes three high-level veriﬁcation criteria: completeness, uniformity, and consistency and correctness. The framework proposes speciﬁc criteria to be able to apply the quality framework to both feature requests and USs. Many of these criteria, however, require supplementary, unstructured information that is not captured in the primary US text. 
+
+Quality frameworks often lack dedicated tools for tasks such as verifying unique IDs or establishing relationships between elements, making it necessary to rely on external tools like Jira for such checks.
+Other sides the QUS Framework focuses on the intrinsic quality of the US text. Other approaches complement QUS by focusing on different notions of quality in RE quality such as performance with USs \cite{lombriser2016gamified} or broader requirements management concerns such as effort estimation and additional information sources such as descriptions or comments \cite{heck2014quality}. 
+AQUSA, in conjunction with the QUS framework, is the only existed tools which offers several compelling reasons to consider its use for managing and enhancing USs in our approach: 
+
+\begin{itemize}
+\item \textbf{Conflict and Dependency between US:} The INVEST criteria's independence attribute effectively manages conflicts and dependencies among USs, ensuring that US do not overlap conceptually, allowing for flexible scheduling and implementation. 
+
+Conversely, in a Quality framework, conflict and dependency between USs are regarded as conformance verification criteria, with a focus on ensuring that no two requirements or use cases are contradictory and that each requirement has a unique identifier. It's worth noting that the Quality framework does not encompass the verification of unique IDs or the establishment of relationships between elements; instead, third-party software is typically tasked with handling this. 
+
+Within the Quality User Stories (QUS) framework, independence is emphasized as a pragmatic quality criterion, requiring that US be self-contained and devoid of inherent dependencies on other stories. Analyzing independencies through AQUSA v1 is a component of Lucassen et al. forthcoming efforts. They emphasis that is improbable that it will fully meet the Perfect Recall Condition unless a significant breakthrough in the computer’s comprehension of NLP emerges. This implies that the automated approach for analyzing conflicts and dependencies remains unresolved.
+\item \textbf{Enhanced Quality Assurance:} AQUSA and the QUS framework provide a systematic approach to ensure the quality of USs. They help identify and rectify various defects, such as missing information, inconsistencies, and ambiguities, leading to more robust requirements.
+\item \textbf{Defect Detection:} AQUSA automates the detection of defects within user stories, including well-formedness issues, uniqueness violations, minimal story violations, and more. This helps reduce the chances of miscommunication and misinterpretation among development teams.
+\item \textbf{Efficient Workflow:} AQUSA streamlines the process of verifying USs, making it easier for requirements engineers and developers to focus on resolving issues rather than manually inspecting every story.
+\item \textbf{Perfect Recall Condition:} AQUSA aims to fulfill the Perfect Recall Condition, minimizing the need for manual verification of USs. This can significantly reduce the risk of missed defects.
+\item \textbf{Quality Assurance Across Tools:} AQUSA's ability to detect and highlight issues, adds an extra layer of quality assurance, helping ensure that USs in popular issue tracking tools like Jira and Pivotal Tracker are well-structured and coherent.
+\item \textbf{Adaptability:} AQUSA can be customized to suit specific requirements and integrate with various issue tracking systems, making it adaptable to different development environments.
+\item \textbf{Independence and Uniqueness:} AQUSA helps maintain the independence and uniqueness of USs, which is crucial for scheduling and implementing stories in any order without causing conflicts or overlaps.
+\end{itemize}
+\subsection{Bottom Line} \label{usq_conclusion}
+A closer look at the INVEST regarding dependencies and conflicts between USs, reveals that INVEST places great emphasis on promoting the autonomy of USs in order to dispense with their active management, which is mainly due to the complicated nature of such a management during the planning and prioritization phase. This perspective promotes a scenario in which USs can progress independently of the completion of other USs. Although this approach is undeniably idealistic, the pragmatic reality often deviates from this ideal. In practice, USs are often interdependent, so such linkages are almost inevitable. 
+
+With regard to the quality framework, it can be seen that there are no explicit criteria relating to conflicts and dependencies between USs, but that it follows the INVEST criteria.
+
+Moreover, it is worth noting that neither framework comes with built-in tools for the automatic analysis of USs. Instead, they rely on third-party software such as Jira for this purpose. The Quality Framework for User Stories (QUS) has a tool called AQUSA that automates the reporting of discrepancies in USs with respect to the QUS criteria. 
+
+Analyzing dependencies through AQUSA v1 is a component of the forthcoming effort by Lucassen et al. Which means, the automatic analysis of dependencies and conflicts between USs is an area that requires future attention and development. In this context, we would like to contribute by addressing this unmet need.
