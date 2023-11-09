@@ -1,0 +1,55 @@
+\begin{thebibliography}{1}
+
+\bibitem{buglione2013improving}
+L.~Buglione and A.~Abran.
+\newblock
+  \href{https://www.computer.org/csdl/pds/api/csdl/proceedings/download-article/12OmNyGbIcd/pdf?casa_token=q6czvG_u_PMAAAAA:02vTDpc5sqt0Tq1ARKeVaqqP-2rcr1Or8Kr-UDcWkfN5VYNl_fkmrISjbxeLKmhpxIg93tY31qzR}{Improving
+  the user story agile technique using the invest criteria}.
+\newblock In {\em 2013 Joint Conference of the 23rd International Workshop on
+  Software Measurement and the 8th International Conference on Software Process
+  and Product Measurement}, pages 49--53. IEEE, 2013.
+
+\bibitem{cohn2004user}
+M.~Cohn.
+\newblock {\em
+  \href{https://www.mountaingoatsoftware.com/uploads/presentations/User-Stories-Applied-Agile-Software-Development-XP-Atlanta-2004.pdf}{User
+  stories applied: For agile software development}}.
+\newblock Addison-Wesley Professional, 2004.
+
+\bibitem{mosser2022modelling}
+S.~Mosser, C.~Pulgar, and V.~Reinharz.
+\newblock
+  \href{https://archipel.uqam.ca/15421/1/ECMFA_2022_paper_3.pdf}{Modelling
+  Agile Backlogs as Composable Artifacts to support Developers and Product
+  Owners}.
+\newblock {\em Journal of Object Technology (JOT)}, 2022.
+
+\bibitem{raharjana2021user}
+I.~K. Raharjana, D.~Siahaan, and C.~Fatichah.
+\newblock
+  \href{https://ieeexplore.ieee.org/iel7/6287639/9312710/09393933.pdf}{User
+  stories and natural language processing: A systematic literature review}.
+\newblock {\em IEEE access}, 9:53811--53826, 2021.
+
+\bibitem{sedano2019product}
+T.~Sedano, P.~Ralph, and C.~P{\'e}raire.
+\newblock \href{https://www.academia.edu/download/79429026/download.pdf}{The
+  product backlog}.
+\newblock In {\em 2019 IEEE/ACM 41st International Conference on Software
+  Engineering (ICSE)}, pages 200--211. IEEE, 2019.
+
+\bibitem{wautelet2017user}
+Y.~Wautelet, S.~Heng, S.~Kiv, and M.~Kolp.
+\newblock
+  \href{https://dial.uclouvain.be/pr/boreal/object/boreal%3A195676/datastream/PDF_01/view}{User-story
+  driven development of multi-agent systems: A process fragment for agile
+  methods}.
+\newblock 2017.
+
+\bibitem{wynne2017cucumber}
+M.~Wynne, A.~Hellesoy, and S.~Tooke.
+\newblock {\em The cucumber book: behaviour-driven development for testers and
+  developers}.
+\newblock Pragmatic Bookshelf, 2017.
+
+\end{thebibliography}
