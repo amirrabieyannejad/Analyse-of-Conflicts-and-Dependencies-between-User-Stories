@@ -61,7 +61,25 @@ Result	&Verification of user story properties (e.g., acceptance criteria)	&Ident
 \end{figure}
 \textbf{EMF Refactoring Model}\\ 
 Since refactoring is a specific kind of model transformation, refactoring of EMF-based models can be specified in Henshin and then integrated into a refactoring framework such as EMF refactor \cite{arendt2013tool}.
-
+\begin{example}
+Similar to the presented instance in GROOVE (as demonstrated in example \ref{groove_example}), we exemplify conflicts and dependencies within Henshin using identical user stories ($US_1$:\enquote{As an administrator, I can add a new person to the database} and $US_2$: \enquote{As a visitor, I can view a person's proﬁle}). Figure \ref{fig:henshin_model} delineates the  class model LDAP (Lightweight Directory Access Protocol). In Figure \ref{fig:henshin_rule}, the defined rules in Henshin, specifically the rule view\_profile linked to $US_2$, and add\_person corresponding to $US_1$, are depicted. The representation uses black to signify object preservation and green for new objects. Additionally, Figure \ref{henshin_cpa_result} (CDA result) showcases the dependencies among the USs, illustrating that in Henshin, a specialized instance graph is not requisite.
+\begin{figure}
+\center
+\includegraphics[width=13.13cm, height=13.6cm]{henshin_class_model}
+\caption{Henshin Class Model LDAP}\label{fig:henshin_model}
+\end{figure}
+\begin{figure}
+\includegraphics[width=13.13cm, height=7.6cm]{henshin_rule_add_person}
+\includegraphics[width=13.13cm, height=7.6cm]{henshin_rule_view_profile}
+\caption{Illustrated rules in Henshin: view\textunderscore{profile} rule related to $US_2$ and add\textunderscore{person} related to $US_1$}\label{fig:henshin_rule}
+\end{figure}
+\begin{figure}
+\center
+\includegraphics[width=8.13cm, height=5.6cm]{henshin_cpa_result}
+%\includegraphics[width=8.13cm, height=3.6cm]{henshin_result}
+\caption{Henshin CPA result}\label{henshin_cpa_result}
+\end{figure}
+\end{example}
 \begin{example}
 To demonstrate the main idea of refactoring in Henshin Born et al. represent an example for class modeling limited to one rule \cite{born2016algorithm}. Rule \emph{Move\_Attribute} (Figure \ref{fig:henshin_refractoring_rule} (a)) specifies the shift of an attribute from its owning class to an associated one along a reference. It is shown in abstract syntax. Objects and references tagged by \emph{\texttt{<<preserve>>}} represent unchanged model elements, elements tagged by \emph{\texttt{<<create>>}} represent new ones whereas those tagged by \emph{\texttt{<<delete>>}} are removed by the transformation \cite{mens2007analysing}.
 
@@ -137,9 +155,9 @@ As a result of the introduction of the robust CPA (critical pair analysis) exten
 
 Moreover, a compelling factor in favor of Henshin is the inherent support of a versatile Application Programming Interface (API) by the CPA extension, facilitating seamless integration of CPA functionality into various tools, including Java-based platforms.
 
-\subsection{Bottom Line}\label{henshin_groove_conclusion}
-It is imperative to note that Groove conducts its analysis with regard to particular instance graphs, whereas Henshin's (critical pair analysis (CPA) remains agnostic to the specifics of instance graphs. Consequently, model checking in Groove necessitates the entire state space, whereas Henshin merely requires the set of rules. In the Henshin approach, instance graphs are not explicitly selected; instead, only rule pairs are analysed, considering overlaps and similar aspects. Usually, the state space in such systems becomes infinitely large, which is a challenge for GROOVE.
+\subsection{Conclusion}\label{henshin_groove_conclusion}
+It is imperative to note that Groove conducts its analysis with regard to particular instance graphs, whereas Henshin's (critical pair analysis (CPA) remains agnostic to the specifics of instance graphs. Consequently, model checking in Groove necessitates the entire state space, whereas Henshin merely requires the set of rules. In the Henshin approach, instance graphs are not explicitly selected; instead, only rule pairs are analysed, considering conflicts and dependencies. Usually, the state space in such systems becomes infinitely large, which is a challenge for GROOVE.
 
-As Henshin enables the specification of constraints and conditions within rules. This can be useful for enforcing and verifying US requirements and ensuring that constraints are met.
+As Henshin enables the specification of constraints and conditions within rules which can be useful for enforcing and verifying US requirements to ensuring that constraints are met.
 
 In the Groove approach, it is not clearly defined what dependencies and conflicts mean. In the case of dependencies, the order in which rules are applied is specified and this order is expected to be maintained in the state space. If there is no alternative order, it can be concluded that there is a dependency between the rules. Conflicts are similar: if rules can be applied in a graph and the resulting transitions are compatible with each other, there is no conflict. However, if the transitions are incompatible, there is a conflict. However, the analysis of the state space always depends on the instance graph selected at the beginning.
