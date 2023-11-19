@@ -9,11 +9,11 @@ Other sides the QUS Framework focuses on the intrinsic quality of the US text. O
 AQUSA, in conjunction with the QUS framework, is the only existed tools which offers several compelling reasons to consider its use for managing and enhancing USs in our approach: 
 
 \begin{itemize}
-\item \textbf{Conflict and Dependency between US:} The INVEST criteria's independence attribute effectively manages conflicts and dependencies among USs, ensuring that US do not overlap conceptually, allowing for flexible scheduling and implementation. 
+\item \textbf{Conflict and Dependency between US:} The INVEST criterion's independence attribute effectively manages conflicts and dependencies among USs, ensuring that US do not overlap conceptually, allowing for flexible scheduling and implementation. 
 
 Conversely, in a Quality framework, conflict and dependency between USs are regarded as conformance verification criteria, with a focus on ensuring that no two requirements or use cases are contradictory and that each requirement has a unique identifier. It's worth noting that the Quality framework does not encompass the verification of unique IDs or the establishment of relationships between elements; instead, third-party software is typically tasked with handling this. 
 
-Within the Quality User Stories (QUS) framework, independence is emphasized as a pragmatic quality criterion, requiring that US be self-contained and devoid of inherent dependencies on other stories. Analyzing independencies through AQUSA v1 is a component of Lucassen et al. forthcoming efforts. They emphasis that is improbable that it will fully meet the Perfect Recall Condition unless a significant breakthrough in the computer’s comprehension of NLP emerges. This implies that the automated approach for analyzing conflicts and dependencies remains unresolved.
+Within the Quality User Stories (QUS) framework, independence is emphasized as a pragmatic quality criterion, requiring that US be self-contained and devoid of inherent dependencies on other stories. Analyzing independencies through AQUSA v1 is a component of Lucassen et al. forthcoming efforts. They emphasis that is improbable that it will fully meet the Perfect Recall Condition unless a significant breakthrough in the computer's comprehension of NLP emerges. This implies that the automated approach for analyzing conflicts and dependencies remains unresolved.
 \item \textbf{Enhanced Quality Assurance:} AQUSA and the QUS framework provide a systematic approach to ensure the quality of USs. They help identify and rectify various defects, such as missing information, inconsistencies, and ambiguities, leading to more robust requirements.
 \item \textbf{Defect Detection:} AQUSA automates the detection of defects within user stories, including well-formedness issues, uniqueness violations, minimal story violations, and more. This helps reduce the chances of miscommunication and misinterpretation among development teams.
 \item \textbf{Efficient Workflow:} AQUSA streamlines the process of verifying USs, making it easier for requirements engineers and developers to focus on resolving issues rather than manually inspecting every story.
@@ -26,6 +26,27 @@ Within the Quality User Stories (QUS) framework, independence is emphasized as a
 A closer look at the INVEST regarding dependencies and conflicts between USs, reveals that INVEST places great emphasis on promoting the autonomy of USs in order to dispense with their active management, which is mainly due to the complicated nature of such a management during the planning and prioritization phase. This perspective promotes a scenario in which USs can progress independently of the completion of other USs. Although this approach is undeniably idealistic, the pragmatic reality often deviates from this ideal. In practice, USs are often interdependent, so such linkages are almost inevitable. 
 
 With regard to the quality framework, it can be seen that there are no explicit criteria relating to conflicts and dependencies between USs, but that it follows the INVEST criteria.
+
+In the QUS framework, a conflict is defined as a requirements conflict that occurs when two or more requirements cause an inconsistency. As far as the inconsistency is concerned, it is not clear to which form it actually belongs. Is it a content inconsistency or an inconsistency in the sense that two user stories are very close to each other and describe the matter slightly differently, which leads to an inconsistency that we can understand as a similarity?
+
+If we look at the analysis of the similarity of texts, \emph{e.g.} with transformation tools or similar, we realise that our analysis cannot effectively recognise strong overlaps between user stories and will not act precisely. We try to capture the content of the user stories through the annotation just through the action, so we can do very lightweight conflict analysis similarity of texts. Very lightweight because there are many inaccuracies, as is often the case with the user stories. But otherwise it is as if the analysis of two user stories are similar but not the same, and somehow contradict each other. 
+
+One is the conflict that can arise in the final described system versus the inconsistencies during the specification of user stories. The content-related conflict in the quality criterion is not even mentioned. They described how the user stories were written down and do not refer to content conflicts. 
+
+Similarly with dependencies, there are explicit dependencies to define in the user stories by saying this user story is based on that and giving it an ID. In another case, we can analyse implicit dependencies by determining, \emph{e.g.}, something has to be created here first so that it can be used there and so creating and using it happens in two different user stories. We call this implicit dependency because it is not explicitly stated in user stories, but if we analyse what is there semantically, we can find out that there is a dependency. 
+
+Both conflicts and dependencies are interesting and both terms and both analyses we would sharpen  and make clear what can be analysed at all. However, this only partially fits in with the quality framework here from AQUSA-tool.
+
+\begin{example}
+Considering two user stories:  $US_1$: \enquote{As a user, I am able to edit any landmark} and $US_2$: \enquote{As a user, I am able to delete only the landmarks that I added}. First, we try to minimize $US_1$ an divided it into three US namely:
+\begin{itemize}
+\item $US_1a$:\enquote{As a user, I am able to add any landmark}
+\item $US_1b$:\enquote{As a user, I am able to modify any landmark}
+\item $US_1c$:\enquote{As a user, I am able to delete any landmark}
+\end{itemize}
+$US_1c$ means that two users are allowed to delete the same landmark, which would lead to a conflict. If $US_1c$ is translated into a rule and the CDA (Conflict and Dependency Analysis) is applied, then Henshin would find this \emph{delete/delete-conflict}. This conflict can be avoided if $US_1c$ is replaced with $US_2$, as two users are then no longer allowed to delete the same landmark.
+The CDA is also able to recognise inconsistencies between user stories. The inconsistency between $US_1c$ and $US_2$ can be recognised because the corresponding rules also have a delete/delete conflict. This occurs when the same landmark is deleted. However, we are investigating the extent to which inconsistencies can be recognised at all. That would be another open question.
+\end{example}
 
 Moreover, it is worth noting that neither framework comes with built-in tools for the automatic analysis of USs. %Instead, they rely on third-party software such as Jira for this purpose.
 The Quality Framework for User Stories (QUS) has a tool called AQUSA that automates the reporting of discrepancies in USs with respect to the QUS criteria. 

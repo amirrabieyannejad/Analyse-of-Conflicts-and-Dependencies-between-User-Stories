@@ -27,14 +27,14 @@ Hence, light systematic mechanisms are needed to help identify dependencies betw
 \includegraphics[width=12.03cm, height=6.7cm]{inherited_depencendy}
 \caption{  Inherited dependencies by user stories\cite{gomez2010systematic} }\label{fig:inherited_dependencies}
 \end{figure}
-The critical pair analysis (CPA) for graph rewriting \cite{hartmanis2006monographs} can be adapted to rule-based model transformation, \emph{e.g.}, to ﬁnd conﬂicting functional requirements for software systems \cite{hausmann2002detection}, or to analyze potential causal dependencies between model refactoring \cite{mens2007analysing} which helps to make informed decisions on the most suitable refactoring to apply next. The CPA reports two diﬀerent forms of potential causal dependencies, called conﬂicts and dependencies \cite{born2015analyzing}.
+The critical pair analysis (CPA) for graph rewriting \cite{hartmanis2006monographs} has been adapted to rule-based model transformation, \emph{e.g.} to find conflicting functional requirements for software systems \cite{hausmann2002detection}, or to analyse potential causal dependencies between model refactorings \cite{mens2007analysing}, which helps to make informed decisions about the most appropriate refactoring to apply next. The CPA reports two different forms of potential causal dependencies, called conflicts and dependencies \cite{born2015analyzing}.
 The application of a rule $r_1$ is in conflict with the application of a rule $r_2$ if
 \begin{itemize}
 \item[--] $r_1$ deletes a model element used by the application of $r_2$ \textbf{(delete/use)}, or
 \item[--] $r_1$ produces a model element that $r_2$ forbids \textbf{(produce/forbid)}, or
 \item[--] $r_1$ changes an attribute value used by $r_2$ \textbf{(change/use)}\footnote{Dependencies between rule applications can be characterized analogously.}. 
 \end{itemize}
-The subsequent dependency results diﬀer in their target of the second attribute movement. The ﬁrst produce/use-dependency (2) represents the case of moving the attribute back to the original class, which leads to a smaller minimal model with only two classes referencing each other, as depicted in Figure \ref{fig:minimal_model}. The highlighting by enclosing hash marks is the most important information, since the enclosing element is the cause of the dependency. The link between 2:Class and 3:Attributeis created by the ﬁrst rule application and is required by the second application. Since all elements and values in the minimal model may be matched by the ﬁrst and the second rule application, there is a generic approach to represent attribute values. Value r1\_source\_r2\_target , \emph{e.g.}, means that it must conform to value source in rule $r_1$ and value target in rule  $r_2$ , respectively (compare Figure \ref{fig:henshin_refractoring_rule}(a)). The second dependency reported in Figure \ref{fig:cpa_result} is the handling of two consecutive attribute shifts \cite{mens2007analysing}.\\ 
+%The subsequent dependency results diﬀer in their target of the second attribute movement. The ﬁrst produce/use-dependency (2) represents the case of moving the attribute back to the original class, which leads to a smaller minimal model with only two classes referencing each other, as depicted in Figure \ref{fig:minimal_model}. The highlighting by enclosing hash marks is the most important information, since the enclosing element is the cause of the dependency. The link between 2:Class and 3:Attributeis created by the ﬁrst rule application and is required by the second application. Since all elements and values in the minimal model may be matched by the ﬁrst and the second rule application, there is a generic approach to represent attribute values. Value r1\_source\_r2\_target , \emph{e.g.}, means that it must conform to value source in rule $r_1$ and value target in rule  $r_2$ , respectively (compare Figure \ref{fig:henshin_refractoring_rule}(a)). The second dependency reported in Figure \ref{fig:cpa_result} is the handling of two consecutive attribute shifts \cite{mens2007analysing}.\\ 
 \textbf{Different between Model Checking and Conflict and Dependency Analysis}\\ 
 In this subsection, we shall delineate two distinct analytical methodologies, specifically model checking and Conflict and Dependency Analysis. Their respective purposes are delineated in Table \ref{tb:sec_6_comparative_analysis}, which serves to elucidate their appropriateness for modeling USs.
 
@@ -59,8 +59,6 @@ Result	&Verification of user story properties (e.g., acceptance criteria)	&Ident
 \end{TableCaption}
 \endgroup
 \end{figure}
-\textbf{EMF Refactoring Model}\\ 
-Since refactoring is a specific kind of model transformation, refactoring of EMF-based models can be specified in Henshin and then integrated into a refactoring framework such as EMF refactor \cite{arendt2013tool}.
 \begin{example}
 Similar to the presented instance in GROOVE (as demonstrated in example \ref{groove_example}), we exemplify conflicts and dependencies within Henshin using identical user stories ($US_1$:\enquote{As an administrator, I can add a new person to the database} and $US_2$: \enquote{As a visitor, I can view a person's proﬁle}). Figure \ref{fig:henshin_model} delineates the  class model LDAP (Lightweight Directory Access Protocol). In Figure \ref{fig:henshin_rule}, the defined rules in Henshin, specifically the rule view\_profile linked to $US_2$, and add\_person corresponding to $US_1$, are depicted. The representation uses black to signify object preservation and green for new objects. Additionally, Figure \ref{henshin_cpa_result} (CDA result) showcases the dependencies among the USs, illustrating that in Henshin, a specialized instance graph is not requisite.
 \begin{figure}
@@ -80,40 +78,40 @@ Similar to the presented instance in GROOVE (as demonstrated in example \ref{gro
 \caption{Henshin CPA result}\label{henshin_cpa_result}
 \end{figure}
 \end{example}
-\begin{example}
-To demonstrate the main idea of refactoring in Henshin Born et al. represent an example for class modeling limited to one rule \cite{born2016algorithm}. Rule \emph{Move\_Attribute} (Figure \ref{fig:henshin_refractoring_rule} (a)) specifies the shift of an attribute from its owning class to an associated one along a reference. It is shown in abstract syntax. Objects and references tagged by \emph{\texttt{<<preserve>>}} represent unchanged model elements, elements tagged by \emph{\texttt{<<create>>}} represent new ones whereas those tagged by \emph{\texttt{<<delete>>}} are removed by the transformation \cite{mens2007analysing}.
+%\begin{example}
+%To demonstrate the main idea of refactoring in Henshin Born et al. represent an example for class modeling limited to one rule \cite{born2016algorithm}. Rule \emph{Move\_Attribute} (Figure \ref{fig:henshin_refractoring_rule} (a)) specifies the shift of an attribute from its owning class to an associated one along a reference. It is shown in abstract syntax. Objects and references tagged by \emph{\texttt{<<preserve>>}} represent unchanged model elements, elements tagged by \emph{\texttt{<<create>>}} represent new ones whereas those tagged by \emph{\texttt{<<delete>>}} are removed by the transformation \cite{mens2007analysing}.
 
 
-\begin{figure}
-\center
-\includegraphics[width=14.13cm, height=5.0cm]{Henshin_refactoring_rule }
-\caption{Henshin refactoring rule (a) and class model Address Book (b) \cite{mens2007analysing} }\label{fig:henshin_refractoring_rule}
-\end{figure}
-Modifying the class model in Figure \ref{fig:henshin_refractoring_rule}(b) by the refactoring specified in Figure \ref{fig:henshin_refractoring_rule}(a), Born et al. observe two potential problems: (1) the attribute \emph{landlineNo} of class Person can be shifted to either class Home or class \emph{Office} (by refactoring\emph{ Move\_Attribute}) \cite{mens2007analysing}. However, if it is shifted to class Home the other refactoring becomes inapplicable (and vice versa). This means, refactoring \emph{Move\_Attribute} is in conflict with itself. (2) The attribute street of class \emph{Person} can be shifted to class \emph{Address} via class \emph{Home} (by two applications of\emph{ Move\_Attribute} along existing references). The second shift is currently not possible since class \emph{Home} does not have an attribute so far, i.e., refactoring Move\_Attribute may depend on itself. Graph transformation theory allows us to analyze such conﬂicts and dependencies at speciﬁcation time by relying on the idea of the CPA \cite{mens2007analysing}.
-\end{example}
+%\begin{figure}
+%\center
+%\includegraphics[width=14.13cm, height=5.0cm]{Henshin_refactoring_rule }
+%\caption{Henshin refactoring rule (a) and class model Address Book (b) \cite{mens2007analysing} }\label{fig:henshin_refractoring_rule}
+%\end{figure}
+%Modifying the class model in Figure \ref{fig:henshin_refractoring_rule}(b) by the refactoring specified in Figure \ref{fig:henshin_refractoring_rule}(a), Born et al. observe two potential problems: (1) the attribute \emph{landlineNo} of class Person can be shifted to either class Home or class \emph{Office} (by refactoring\emph{ Move\_Attribute}) \cite{mens2007analysing}. However, if it is shifted to class Home the other refactoring becomes inapplicable (and vice versa). This means, refactoring \emph{Move\_Attribute} is in conflict with itself. (2) The attribute street of class \emph{Person} can be shifted to class \emph{Address} via class \emph{Home} (by two applications of\emph{ Move\_Attribute} along existing references). The second shift is currently not possible since class \emph{Home} does not have an attribute so far, i.e., refactoring Move\_Attribute may depend on itself. Graph transformation theory allows us to analyze such conﬂicts and dependencies at speciﬁcation time by relying on the idea of the CPA \cite{mens2007analysing}.
+%\end{example}
 \textbf{CPA Tool}\\
 The provided CPA extension of Henshin can be used in two diﬀerent ways: Its application programming interface (API) can be used to integrate the CPA into other tools and a user interface (UI) is provided supporting domain experts in developing rules by using the CPA interactively \cite{mens2007analysing}.
 
 After invoking the analysis, the rule set and the kind of critical pairs to be analyzed have to be speciﬁed. Furthermore, options can be customized to stop the calculation after ﬁnding a ﬁrst critical pair, to ignore critical pairs of the same rules, etc. The resulting list of critical pairs is shown and ordered along rule pairs. 
 
-Figure \ref{fig:cpa_result} depicts an example for the analysis of rule \emph{Move\_Attribute}, in which the\emph{ delete/use conﬂict} (1) corresponds to the example illustrated in figure \ref{fig:minimal_model} \cite{mens2007analysing}.
-The subsequent dependency results diﬀer in their target of the second attribute movement. The ﬁrst produce/use-dependency (2) represents the case of moving the attribute back to the original class, which leads to a smaller minimal model with only two classes referencing each other, as depicted in Figure \ref{fig:minimal_model}. The highlighting by enclosing hash marks is the
-most important information, since the enclosing element is the cause of the dependency. The link between 2:Class and 3:Attribute is created by the ﬁrst rule application and is required by the second application. Since all elements and values in the minimal model may be matched by the ﬁrst and the second rule application, there is a generic approach to represent attribute
-values. Value \emph{r1\_source\_r2\_target}, e.g., means that it must conform to value source in rule \emph{r1} and value target in rule \emph{r2}, respectively (compare Fig. \ref{fig:henshin_refractoring_rule}(a)).
+%Figure \ref{fig:cpa_result} depicts an example for the analysis of rule \emph{Move\_Attribute}, in which the\emph{ delete/use conﬂict} (1) corresponds to the example illustrated in figure \ref{fig:minimal_model} \cite{mens2007analysing}.
+%The subsequent dependency results diﬀer in their target of the second attribute movement. The ﬁrst produce/use-dependency (2) represents the case of moving the attribute back to the original class, which leads to a smaller minimal model with only two classes referencing each other, as depicted in Figure \ref{fig:minimal_model}. The highlighting by enclosing hash marks is the
+%most important information, since the enclosing element is the cause of the dependency. The link between 2:Class and 3:Attribute is created by the ﬁrst rule application and is required by the second application. Since all elements and values in the minimal model may be matched by the ﬁrst and the second rule application, there is a generic approach to represent attribute
+%values. Value \emph{r1\_source\_r2\_target}, e.g., means that it must conform to value source in rule \emph{r1} and value target in rule \emph{r2}, respectively (compare Fig. \ref{fig:henshin_refractoring_rule}(a)).
 
-The second dependency reported in Figure \ref{fig:cpa_result} is the handling of two consecutive attribute shifts.
+%The second dependency reported in Figure \ref{fig:cpa_result} is the handling of two consecutive attribute shifts.
 
-\begin{figure}
-\center
-\includegraphics[width=6.22cm, height=2.96cm]{cpa_result}
+%\begin{figure}
+%\center
+%\includegraphics[width=6.22cm, height=2.96cm]{cpa_result}
 %\includegraphics[width=6.22cm, height=2.96cm]{rule_move_attribute}
-\caption{The result view\cite{born2015analyzing} }\label{fig:cpa_result}
-\end{figure}
-\begin{figure}
-\center
-\includegraphics[width=12.13cm, height=13.0cm]{detailed_representation}
-\caption{Detailed representation of a critical pair showing a dependency \cite{born2015analyzing} }\label{fig:minimal_model}
-\end{figure}
+%\caption{The result view\cite{born2015analyzing} }\label{fig:cpa_result}
+%\end{figure}
+%\begin{figure}
+%\center
+%\includegraphics[width=12.13cm, height=13.0cm]{detailed_representation}
+%\caption{Detailed representation of a critical pair showing a dependency \cite{born2015analyzing} }\label{fig:minimal_model}
+%\end{figure}
 
 \subsection{Comparative Analysis}\label{sec_6_comparative_analysis}
 In the following we compare two graph-based modelling tools using different categories, inspired by \cite{ghamarian2012modelling}. 
@@ -135,14 +133,14 @@ An overview of this comparison is given in table \ref{tb:sec_6_comparative_analy
 \hline
 Aspects&	GROOVE	&Henshin\\
 \hline\hline
-Area	&Model transformation, Veriﬁcation, Analysis, Simulation	&EMF-based transformation model, Analysis, Simulation, Verification \\ \\ 
-Typing&	Node types, Full types	&Full types\\\\ 
-Control&	Rule priorities, Control program	&non-deterministic rule choices, sequential and priorities over Transformation unit \\\\ 
-Strategy&	Linear exploration, Full state space exploration, Find rule application, Random linear exploration	&model analysis and conflict resolution\\\\ 
-Relevant Features&	Quantiﬁed rules, Wildcards and regular expressions	&CPA extension of Henshin\\\\ 
-Interface&	GUI helps debugging, GUI helps prototyping, GUI helps analysis of results	&GUI helps prototyping, GUI helps analysis of results\\\\ 
-Strong Points&	Rapid prototyping, Local conﬂuence check, Analysis capabilities, Rule expressiveness	&Rapid prototyping, supporting analyzing of conflicts and dependencies, Interoperability using API, Scalability, Performance\\\\ 
-Weak Points&	Model trafo support, Interoperability, Scalability, Performance, Animation, Analyzing conflicts and dependencies 	&required learning curve for new users to EMF and transformation process, complexity in rule sequencing, not support untyped mode\\\\ 
+Area	&Model Transformation, Veriﬁcation, Analysis, Simulation	&EMF-Based Transformation model, Analysis, Simulation, Verification \\ \\ 
+Typing and Inheritance&	Node Types, Multiple Inheritance	&Multiple Inheritance\\\\ 
+Control&	Rule Priorities, Control Program	&Non-Deterministic Rule Choices, Sequential and Priorities Over Transformation Unit \\\\ 
+Verification&	 Full State Space Exploration, Model Checking	&Model Transformation System (Transformation Module) and Conflict Detection, State Space Exploration, Model Checking\\\\ 
+Relevant Features&	Quantiﬁed Rules, Wildcards and Regular Expressions	&CPA Extension of Henshin\\\\ 
+Interface&	GUI Helps Debugging, Prototyping, Analysis of Results	&GUI Helps Prototyping, GUI Helps Analysis of Results\\\\ 
+Strong Points&	Rapid Prototyping, Local Conﬂuence Check, Analysis Capabilities (only available at the state level, but not at the rule level as in Henshin), Rule Expressiveness	&Rapid Prototyping, Supporting Analyzing of Conflicts and Dependencies, Interoperability using API, Scalability, Performance\\\\ 
+Weak Points&	Model Transformation Support, Interoperability, Scalability, Performance, Animation, Analyzing Conflicts and Dependencies 	&Required learning curve for new users to EMF and Transformation Process, Complexity in rule sequencing, Not support untyped mode\\\\ 
 \hline
 
 \end{tabularx}
@@ -158,6 +156,6 @@ Moreover, a compelling factor in favor of Henshin is the inherent support of a v
 \subsection{Conclusion}\label{henshin_groove_conclusion}
 It is imperative to note that Groove conducts its analysis with regard to particular instance graphs, whereas Henshin's (critical pair analysis (CPA) remains agnostic to the specifics of instance graphs. Consequently, model checking in Groove necessitates the entire state space, whereas Henshin merely requires the set of rules. In the Henshin approach, instance graphs are not explicitly selected; instead, only rule pairs are analysed, considering conflicts and dependencies. Usually, the state space in such systems becomes infinitely large, which is a challenge for GROOVE.
 
-As Henshin enables the specification of constraints and conditions within rules which can be useful for enforcing and verifying US requirements to ensuring that constraints are met.
+Since Henshin enables the specification of constraints and conditions within rules, which can be useful for enforcing and verifying US requirements to ensure that constraints are met.
 
 In the Groove approach, it is not clearly defined what dependencies and conflicts mean. In the case of dependencies, the order in which rules are applied is specified and this order is expected to be maintained in the state space. If there is no alternative order, it can be concluded that there is a dependency between the rules. Conflicts are similar: if rules can be applied in a graph and the resulting transitions are compatible with each other, there is no conflict. However, if the transitions are incompatible, there is a conflict. However, the analysis of the state space always depends on the instance graph selected at the beginning.
