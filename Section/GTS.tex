@@ -1,11 +1,11 @@
 \section{Analysis by Graph Transformation Tools}\label{gts}
 In this section, some basic definitions about graph transformation and transformation rules are first established for better understanding. Afterwards, we dive into graph transformation tools, which play a pivotal role in our methodology. 
 
-In a software development process, the class architecture is getting changed over the development, \emph{e.g.} due to a change of requirements, which results in a change of the class diagram. During runtime of a software an object diagram can also be modified trough creating or deleting of new objects. 
+In a software development process, the class architecture is getting changed over the development, \emph{e.g.} due to a change of requirements, which results in a change of the class diagram. During runtime of a software, an object diagram can also be modified trough creating or deleting of new objects. 
 
-Many structures, that can be represented as graph are able change or mutate. This suggests the introduction of a method to modify graphs through the creation or deletion of nodes and edges. This graph modification can be performed by the so-called graph transformations. There are many approaches to model graph transformations \emph{e.g.} the double pushout approach or the single pushout approach which are both concepts based on pushouts from category theory in the category Graphs.\\ 
+Many structures, that can be represented as graph, are able to change or mutate. This suggests the introduction of a method to modify graphs through the creation or deletion of nodes and edges. This graph modification can be performed by the so-called graph transformations. There are many approaches to model graph transformations \emph{e.g.} the double pushout approach or the single pushout approach, which are both concepts based on pushouts from category theory in the category Graphs.\\ 
 \textbf{Graphs and Typed Graphs}\\ 
-A graph is comprised of nodes and edges, with each edge connecting precisely two nodes and having the option to be directed or undirected. When an edge is directed, it designates a distinct start node (source) and an end node (target). For the purpose of this discussion, we will focus on directed graphs.
+A graph consists of nodes and edges, with each edge connecting precisely two nodes and having the option to be directed or undirected. When an edge is directed, it designates a distinct start node (source) and an end node (target). For the purpose of this discussion, we will focus on directed graphs.
 
 \begin{definition}[\textbf{graph}]
 \label{def_graph}

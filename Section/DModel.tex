@@ -1,5 +1,5 @@
 \section{Extracting Domain Models from Textual Requirements}\label{dmodel}
-Automated support for extracting domain models from requirements artefacts such as USs play a central role in effectively supporting the detection of dependencies and conflicts between user stories. Domain models are a simple way to understand the relationship between artefacts and the whole system. 
+Automated support for extracting domain models from requirements artifacts such as USs play a central role in effectively supporting the detection of dependencies and conflicts between user stories. Domain models are a simple way to understand the relationship between artifacts and the whole system. 
 
 In this section, we present a comprehensive exploration of techniques that can be employed for the extraction of domain models from agile product backlogs. Furthermore, we conduct a comparative analysis of these techniques. 
 \subsection{Visual Narrator: (Automated) Extraction of Conceptual Models form US} \label{vnarrator}
@@ -27,7 +27,7 @@ Robeer et al. identified three main purposes that the \emph{ends} may take: (1) 
 \textbf{The Visual Narrator Tool}\\
 To enable the automated extraction of conceptual modes from USs, Robeer et al. developed the \emph{Visual Narrator} tool on the basis of the 11 heuristics \cite{Robeer2016} which takes a set of USs as input and generates a conceptual model as output. The tool only accepts USs that use the indicator as identified by Wautelet \cite{Wautelet2014}: As | \emph{As a(n)} for the role, \emph{I want (to)} | \emph{I can} / \emph{I am able} / \emph{I would like} for the means, and \emph{so that} for the ends part. Syntactically invalid USs are not processed; in order to sanitize these stories, analysts should pre-process them using tools such as AQUSA \cite{lucassen2016improving}.
 
-The architecture of Visual Narrator comprises two main components: (1) the \emph{Processor} and the (2) \emph{Constructor}. The Processor analyzes USs, parsing them into tokens using spaCy \footnote{\href{https://spacy.io/}{\emph{https://spacy.io/}}} and determining token weights based on frequency and user-defined parameters. This results in a \emph{Term-by-User-Story} matrix with weighted terms.
+The architecture of Visual Narrator comprises two main components: (1) the \emph{Processor} and the (2) \emph{Constructor}. The Processor analyzes USs, parsing them into tokens using spaCy \footnote{\href{https://spacy.io/}{\emph{https://spacy.io/}}} and determining token weights based on frequency and user-defined parameters. These results in a \emph{Term-by-User-Story} matrix with weighted terms.
 
 The Constructor then generates a conceptual model from the \emph{WeightedTokens}. It involves the \emph{PatternIdentifier}, which applies heuristics to identify patterns in USs, and the \emph{PatternFactory}, which creates an internal conceptual model based on these patterns and filters out concepts and relationships with weights below a user-specified \emph{threshold}. The Ontology component stores this model, linking parts of it to their originating USs.
 
