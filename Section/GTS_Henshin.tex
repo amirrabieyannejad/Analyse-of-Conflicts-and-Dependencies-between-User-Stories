@@ -75,9 +75,43 @@ Similar to the presented instance in GROOVE (as demonstrated in example \ref{gro
 \center
 \includegraphics[width=8.13cm, height=5.6cm]{henshin_cpa_result}
 %\includegraphics[width=8.13cm, height=3.6cm]{henshin_result}
-\caption{Henshin CPA result}\label{henshin_cpa_result}
+\caption{Henshin CDA result visualises dependencies between user stories}\label{henshin_cpa_result}
 \end{figure}
 \end{example}
+\begin{example}
+Looking at the USs mentioned in the example \ref{example_conflict}, $US_1$: \enquote{As a user, I am able to edit any landmark.} and $US_2$:\enquote{As a user, I am able to delete only the landmarks that I added.}. First, we minimize $US_1$ and divided it into three USs as follows:
+\begin{itemize}
+\item $US_1a$:\enquote{As a user, I am able to add any landmark.}
+\item $US_1b$:\enquote{As a user, I am able to modify any landmark.}
+\item $US_1c$:\enquote{As a user, I am able to delete any landmark.}
+\end{itemize}
+Figure \ref{fig:conflict_model} shows the class model \enquote{Map} while figure \ref{fig:conflict_rule} shows the defined rules in Henshin, with each rule corresponding to a user story.
+
+If $US_1c$ is translated into a rule and then CDA (Conflict and Dependency Analysis) is applied (Figure \ref{fig:conflict_cda}), Henshin would find a \enquote{Delete-Delete} conflict. This conflict can be avoided if $US_1c$ is replaced with $US_2$, as two users are then no longer allowed to delete the same landmark.
+
+Figure \ref{fig:conflict_cda} shows the conflicts and dependencies either between two rules or between a rule and itself. For instance, there is a \enquote{Delete-Delete} conflict in $US_1c$. If the specific landmark are deleted, $US_1c$ cannot be applied anymore. 
+
+Furthermore, there is a \enquote{Create-Delete} conflict between $US_1b$ and $US_2$. If the specific landmark are deleted, $US_1b$ cannot modify that landmark anymore.
+
+The CDA is also able to recognise inconsistencies between user stories. The inconsistency for example between $US_1c$ and $US_2$ can be recognised because the corresponding rules also have a \enquote{Delete-Delete} conflict. This occurs when the same landmark is deleted. %However, we are investigating the extent to which inconsistencies can be recognised at all. That would be another open question.
+
+\begin{figure}
+\center
+\includegraphics[width=8.28cm, height=7.6cm]{henshin_conflict_model}
+\caption{Henshin Class Model Map}\label{fig:conflict_model}
+\end{figure}
+\begin{figure}
+\center
+\includegraphics[width=13.13cm, height=10.6cm]{henshin_conflict_rule}
+\caption{Illustrated rules in Henshin: add\textunderscore{landmark} rule related to $US_1a$, delete\textunderscore{any}\textunderscore{landmark} rule related to $US_1c$, modify\textunderscore{landmark} rule related to $US_1b$ and delete\textunderscore{my}\textunderscore{landmark} rule related to $US_2$ }\label{fig:conflict_rule}
+\end{figure}
+\begin{figure}
+\center
+\includegraphics[width=9.2cm, height=9.9cm]{henshin_conflict_cda_result}
+\caption{Henshin CPA result visualises conflicts and dependencies between user stories}\label{fig:conflict_cda}
+\end{figure}
+\end{example}
+
 %\begin{example}
 %To demonstrate the main idea of refactoring in Henshin Born et al. represent an example for class modeling limited to one rule \cite{born2016algorithm}. Rule \emph{Move\_Attribute} (Figure \ref{fig:henshin_refractoring_rule} (a)) specifies the shift of an attribute from its owning class to an associated one along a reference. It is shown in abstract syntax. Objects and references tagged by \emph{\texttt{<<preserve>>}} represent unchanged model elements, elements tagged by \emph{\texttt{<<create>>}} represent new ones whereas those tagged by \emph{\texttt{<<delete>>}} are removed by the transformation \cite{mens2007analysing}.
 

@@ -39,15 +39,18 @@ In addition, we could use the User Story-ID to obtain information about the impl
 
 Both conflicts and dependencies are interesting and both terms and both analyses we would sharpen  and make clear what can be analysed at all. However, this only partially fits in with the quality framework here from AQUSA-tool.
 
-\begin{example}
+\begin{example}\label{example_conflict}
 Considering two user stories:  $US_1$: \enquote{As a user, I am able to edit any landmark} and $US_2$: \enquote{As a user, I am able to delete only the landmarks that I added}. First, we try to minimize $US_1$ and divided it into three USs namely:
 \begin{itemize}
-\item $US_1a$:\enquote{As a user, I am able to add any landmark}
-\item $US_1b$:\enquote{As a user, I am able to modify any landmark}
-\item $US_1c$:\enquote{As a user, I am able to delete any landmark}
+\item $US_1a$:\enquote{As a user, I am able to add any landmark.}
+\item $US_1b$:\enquote{As a user, I am able to modify any landmark.}
+\item $US_1c$:\enquote{As a user, I am able to delete any landmark.}
 \end{itemize}
-$US_1c$ means that two users are allowed to delete the same landmark, which would lead to a conflict. If $US_1c$ is translated into a rule and the CDA (Conflict and Dependency Analysis) is applied, then Henshin would find this \emph{delete/delete-conflict}. This conflict can be avoided if $US_1c$ is replaced with $US_2$, as two users are then no longer allowed to delete the same landmark.
-The CDA is also able to recognise inconsistencies between user stories. The inconsistency between $US_1c$ and $US_2$ can be recognised because the corresponding rules also have a delete/delete conflict. This occurs when the same landmark is deleted. However, we are investigating the extent to which inconsistencies can be recognised at all. That would be another open question.
+$US_1c$ means that two users are allowed to delete the same landmark, which would lead to a conflict. %If $US_1c$ is translated into a rule and the CDA (Conflict and Dependency Analysis) is applied, then Henshin would find this \emph{delete/delete-conflict}.
+This conflict can be avoided if $US_1c$ is replaced with $US_2$, as two users are then no longer allowed to delete the same landmark.
+%The CDA is also able to recognise inconsistencies between user stories. 
+%The inconsistency between $US_1c$ and $US_2$ can be recognised because the corresponding rules also have a delete/delete conflict. This occurs when the same landmark is deleted. However, we are investigating the extent to which inconsistencies can be recognised at all. That would be another open question.
+Furthermore, this situation cause an inconsistency between $US_1c$ and $US_2$, e.g. if $US_2$ deletes the landmark that was added by a particular user, $US_1c$ can no longer find this landmark and vice versa.
 \end{example}
 
 Moreover, it is worth noting that neither framework comes with built-in tools for the automatic analysis of USs. %Instead, they rely on third-party software such as Jira for this purpose.
