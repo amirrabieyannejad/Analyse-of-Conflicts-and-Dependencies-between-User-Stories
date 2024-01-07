@@ -87,27 +87,25 @@ Looking at the USs mentioned in the example \ref{example_conflict}, $US_1$: \enq
 \end{itemize}
 Figure \ref{fig:conflict_model} shows the class model \enquote{Map} while figure \ref{fig:conflict_rule} shows the defined rules in Henshin, with each rule corresponding to a user story.
 
-If $US_1c$ is translated into a rule and then CDA (Conflict and Dependency Analysis) is applied (Figure \ref{fig:conflict_cda}), Henshin would find a \enquote{Delete-Delete} conflict. This conflict can be avoided if $US_1c$ is replaced with $US_2$, as two users are then no longer allowed to delete the same landmark.
+In this example, we assume that a user only performs one action at a time.
+If $US_1c$ is translated into a rule and then CDA (Conflict and Dependency Analysis) is applied (Figure \ref{fig:conflict_cda}), Henshin would find a \enquote{Delete-Delete} conflict between two \enquote{Actions (verbs)} in $US_1c$ and $US_2$ where two users are allowed to delete the same landmark. This conflict can be avoided if $US_1c$ is replaced with $US_2$, as two users are then no longer allowed to delete the same landmark.
 
-Figure \ref{fig:conflict_cda} shows the conflicts and dependencies either between two rules or between a rule and itself. For instance, there is a \enquote{Delete-Delete} conflict in $US_1c$. If the specific landmark are deleted, $US_1c$ cannot be applied anymore. 
-
-Furthermore, there is a \enquote{Create-Delete} conflict between $US_1b$ and $US_2$. If the specific landmark are deleted, $US_1b$ cannot modify that landmark anymore.
-
-The CDA is also able to recognise inconsistencies between user stories. The inconsistency for example between $US_1c$ and $US_2$ can be recognised because the corresponding rules also have a \enquote{Delete-Delete} conflict. This occurs when the same landmark is deleted. %However, we are investigating the extent to which inconsistencies can be recognised at all. That would be another open question.
+Figure \ref{fig:conflict_cda} shows the conflicts and dependencies between two rules. For Instance, there is a \enquote{Create-Delete} conflict between $US_1b$ and $US_2$. If the specific landmark are deleted, $US_1b$ cannot modify that landmark anymore.
+%The CDA is also able to recognise inconsistencies between user stories. The inconsistency for example between $US_1c$ and $US_2$ can be recognised because the corresponding rules also have a \enquote{Delete-Delete} conflict. This occurs when the same landmark is deleted. %However, we are investigating the extent to which inconsistencies can be recognised at all. That would be another open question.
 
 \begin{figure}
 \center
-\includegraphics[width=8.28cm, height=7.6cm]{henshin_conflict_model}
+\includegraphics[width=15.2cm, height=9.0cm]{henshin_conflict_model}
 \caption{Henshin Class Model Map}\label{fig:conflict_model}
 \end{figure}
 \begin{figure}
 \center
-\includegraphics[width=13.13cm, height=10.6cm]{henshin_conflict_rule}
-\caption{Illustrated rules in Henshin: add\textunderscore{landmark} rule related to $US_1a$, delete\textunderscore{any}\textunderscore{landmark} rule related to $US_1c$, modify\textunderscore{landmark} rule related to $US_1b$ and delete\textunderscore{my}\textunderscore{landmark} rule related to $US_2$ }\label{fig:conflict_rule}
+\includegraphics[width=15.cm, height=17.0cm]{henshin_conflict_rule}
+\caption{Illustrated rules in Henshin: add\textunderscore{any}\textunderscore{landmark} rule related to $US_1a$, modify\textunderscore{any}\textunderscore{landmark} rule related to $US_1b$, delete\textunderscore{any}\textunderscore{landmark} rule related to $US_1c$  and delete\textunderscore{my}\textunderscore{landmark} rule related to $US_2$ }\label{fig:conflict_rule}
 \end{figure}
 \begin{figure}
 \center
-\includegraphics[width=9.2cm, height=9.9cm]{henshin_conflict_cda_result}
+\includegraphics[width=8.2cm, height=4.6cm]{henshin_conflict_cda_result}
 \caption{Henshin CPA result visualises conflicts and dependencies between user stories}\label{fig:conflict_cda}
 \end{figure}
 \end{example}
